@@ -1,0 +1,10 @@
+<%= render template: 'notes/show' %>
+
+</br>
+</br>
+<h2>Liked Users</h2>
+<% @users.each do |user| %>
+    <%= image_for(user) %>
+    <%= user.name %> 
+    <%= user.email %>
+<%end%>

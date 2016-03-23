@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Gatebook</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container">
+      <div id="logo">Gatebook</div>
+      <ul class="header-right">
+        <% if user_signed_in? %>
+          <li><%= link_to "TOP", root_path %></li>
+          <li><%= link_to "ABOUT", about_path %></li>
+          <li><%= link_to 'All Users' ,users_path %> </li>
+          <li><%= link_to current_user.email, current_user %></li>
+          <li><%= link_to "Log Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+          <li><%= link_to "TOP", root_path %></li>
+          <li><%= link_to "ABOUT", about_path %></li>
+          <li><%= link_to "Sign Up", new_user_registration_path %></li>
+          <li><%= link_to "Log in", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </header>
+  
+  <div class="container">
+     <p class="alert alert-success">
+      <%= flash[:notice] %>
+      </p>
+      <p class="alert alert-danger">
+    <%= flash.now[:alert] %>
+    </p>
+    <%= yield %>
+  </div>
+
+  <div class="container">
+    <footer class="footer">
+      <div class="small">
+        just test
+        <%= debug(params) if Rails.env.development? %>
+        <%= params.inspect %>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
